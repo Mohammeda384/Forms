@@ -5,7 +5,7 @@ router.get('/', (req, res)=>{
     res.send('User List');
 });
 router.get('/new', (req, res)=>{ // /users/new
-    res.send('User New Form');
+    res.render('users/new', {firstName: "Test"})
 });
 
 
@@ -18,6 +18,8 @@ const users = [
 // });
 
 router.route('/:id').get((req, res) => {
+    console.log(req.user);
+    console.log('Getting user data!')
     res.send(`Getting User data for id: ${req.params.id}`);
 }).delete((req, res) => {
     res.send(`Deleting User data for id: ${req.params.id}`);
