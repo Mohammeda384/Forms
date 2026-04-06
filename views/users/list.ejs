@@ -7,13 +7,16 @@
 </head>
 <body>
     <H1> Our Current users</H1>
-    <ul>
+    <table border = "1">
     <% 
     let users = locals.users;
     for(user of users){ %>
-       <li><%= user.firstName %></li>
+        <tr>
+            <td><a href= "/users/<%= users.indexOf(user) %>"><%=user.firstName %></a></td>
+            <td><%= user.lastName %></td>
+        </tr>
+      
     <% } %>
-
-    </ul>
+    </table>
 </body>
 </html>

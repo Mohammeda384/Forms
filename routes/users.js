@@ -11,7 +11,7 @@ router.route('/').get((req, res)=>{
         users.push({firstName, lastName, gender, age});
         res.redirect('/users/list');
         
-        res.render('users/list', {users})
+       // res.render('users/list', {users})
     }
     else{
         console.log("Error adding user");

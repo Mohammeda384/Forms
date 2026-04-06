@@ -13,8 +13,23 @@
         </label>
 
         <label for="lastName">
-            First Name: 
-            <input type="text" name="firstName" value="<%= locals.firstName %>">
+            Last Name: 
+            <input type="text" name="lastName" value="<%= locals.lastName %>">
+        </label>
+
+        <label for= "gender" > 
+            Gender: 
+            <select name = "gender">
+                <option value = "Male" >Male </option>
+                <option value = "Female" >Female </option>
+                <option value = "Other" >Other </option>
+
+            </select>
+        </label>
+
+        <label for="age">
+            Age:  
+            <input type="number" name="age" value="<%= locals.age %>">
         </label>
         <button type="submit">Submit</button>
     </form>
