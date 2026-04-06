@@ -35,9 +35,12 @@ const users = [
 // });
 
 router.route('/:id').get((req, res) => {
-    console.log(req.user);
-    console.log('Getting user data!')
-    res.send(`Getting User data for id: ${req.params.id}`);
+
+    const user = users[req.params.id];
+    res.render('users/showAll', {user});
+    // console.log(req.user);
+    // console.log('Getting user data!')
+    // res.send(`Getting User data for id: ${req.params.id}`);
 }).delete((req, res) => {
     res.send(`Deleting User data for id: ${req.params.id}`);
 }).put((req, res) => {
