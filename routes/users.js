@@ -4,16 +4,18 @@ const router = express.Router();
 router.route('/').get((req, res)=>{
     res.send('User List');
 }).post((req, res) =>{
-    const firstName = req.body.firstName;
+    const {firstName, lastName, gender, age} = req.body;
     const isValid = firstName !=="";
     if (isValid){
-        console.log(`Adding user: ${firstName}`);
-        users.push({firstName});
+        console.log(`Adding user: ${firstName} ${lastName} ${gender} ${age}`);
+        users.push({firstName, lastName, gender, age});
+        res.redirect('/users/list');
+        
         res.render('users/list', {users})
     }
     else{
         console.log("Error adding user");
-        res.render('users/new', {firstName:firstName})
+        res.render('users/new', {firstName:firstName, lastName:lastName, gender: gender, age:age})
     }
 });
 router.get('/list', (req, res) =>{
