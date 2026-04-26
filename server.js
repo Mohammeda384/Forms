@@ -3,6 +3,7 @@ const app = express();
 
 const userRouter = require('./routes/users')
 const quizRouter = require('./routes/quiz');
+
 app.set('view engine', 'ejs');
 app.use(express.static("public"));
 

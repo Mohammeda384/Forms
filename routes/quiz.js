@@ -5,31 +5,44 @@ router.get("/", async (req, res) => {
     //get 4 words, with their pos and def and send back to the other page
     //send those back and render quiz.ejs
     let chosenWords = await getWords();
+
+    res.render('quiz', { chosenWords: chosenWords })
 });
 
-router.post("/", (req, res)=>{
+router.post("/", async (req, res) => {
+    let chosenWords = await getWords()
+
     console.log(req.body);
+
+    // refresh new chosen words
+
+    // render the quiz again
+    res.render('quiz', { chosenWords: chosenWords })
+    // Need to add the stuff here to render quiz
 });
 
 
 let getWords = async () => {
-    //get a random part of speech
+
+
     //baed on that, pick 4 words that match
     let randomPart = getRandomPart();
-    let allWords = await readFile('resourlce/allwords.txt', 'utf8'); 
+    let allWords = await readFile('resources/allwords.txt', 'utf8');
     let wordArray = allWords.split('\n');
     shuffle(wordArray);
 
     let choices = []
-    while(choices.length <5){
+    while (choices.length < 5) {
+        // The issue is here because line is not returning anything
         let line = wordArray.pop();
         let tokens = line.split('\t');
-        let part = tokens[0];
+        let part = tokens[1];
         let def = tokens[2];
-        if (part ===randomPart){
+        if (part === randomPart) {
             choices.push(line);
         }
     }
+    return choices;
 }
 let getRandomPart = () => {
     let parts = ['noun', 'verb', 'adjective']
@@ -42,7 +55,7 @@ let getRandomPart = () => {
 
 let shuffle = (array) => {
     //fisher Yates algorithm
-    for (let i = 0; i < array.length - 1; i--) {
+    for (let i = array.length; i > 0; i--) {
         let randomNumber = Math.floor(Math.random() * (i + 1));
         [array[i], array[randomNumber]] = [array[randomNumber], array[i]];
     }

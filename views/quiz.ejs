@@ -12,7 +12,7 @@
     <h2><%= correctWord %> - <%= correctPart %></h2>
     <form action="quiz" method="post"> <!--submits to quiz.js -->
     <ol>
-        <% for (currentWord of chosenWords) { %>
+        <% for (currentWord of chosenWords) { 
             //Loop through each word, show its definition only in the list
             let [word, part, def] = currentWord.split('\t'); %>
             <li>
