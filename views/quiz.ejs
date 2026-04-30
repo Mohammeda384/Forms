@@ -1,11 +1,14 @@
 <html lang="en">
 <head>
+    <link rel = "stylesheet" href = "./styles.css">
 </head>
 <body>
     <%
         let randomIndex = parseInt(Math.random()*chosenWords.length); //generate a random index
         let chosenWord = chosenWords[randomIndex]; //pick that as our correct word
         let [correctWord, correctPart, correctDef] = chosenWord.split('\t'); //breaking it up into the 3 pieces
+        let totalQuestions = locals.totalQuestions ?? 0;
+        let answersCorrect = locals.answersCorrect ?? 0;
     %>
     <h1>Word Quiz!</h1>
     <!--Show the word and part of speech -->
@@ -23,8 +26,20 @@
             </li>
         <% } %>
     </ol>
-    <input type="submit" value="Submit Answer!">
+    
+    
+
+  
+     
+    <input type="submit" name = "action" value="Submit Answer">
+    <h2> Total Questions: <%= totalQuestions %></h2>
+    <p> Answers Correct: <%= answersCorrect %> </p>
+
+
     <input type="hidden" name ="correctDef" value="<%= correctDef %>">
+    <input type="hidden" name ="correctWord" value="<%= correctWord %>">
+    <input type="hidden" name ="totalQuestions" value="<%= totalQuestions %>">
+    <input type="hidden" name ="answersCorrect" value="<%= answersCorrect %>">
     </form>
 </body>
 </html>

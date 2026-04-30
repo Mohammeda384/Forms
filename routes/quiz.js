@@ -5,19 +5,32 @@ router.get("/", async (req, res) => {
     //get 4 words, with their pos and def and send back to the other page
     //send those back and render quiz.ejs
     let chosenWords = await getWords();
-
-    res.render('quiz', { chosenWords: chosenWords })
+    let isSubmitted = false;
+   
+    res.render('quiz', { chosenWords: chosenWords, isCorrect: false, isSubmitted: false})
 });
 
 router.post("/", async (req, res) => {
-    let chosenWords = await getWords()
-
-    console.log(req.body);
+    let chosenWords = await getWords();
+   
+    let {userChoice, correctDef, correctWord, totalQuestions, answersCorrect} = req.body;
+     let isCorrect = userChoice == correctDef;
+    if (isCorrect){
+        answersCorrect ++;
+        console.log(`Answers Correct: ${answersCorrect}`);
+    }
+    
+    totalQuestions ++;
+    console.log(req.body)
+    console.log(`Total Questions: ${totalQuestions}`);
+    res.render('quiz', {chosenWords: chosenWords, correctDef: correctDef, correctWord: correctWord, totalQuestions: totalQuestions, answersCorrect: answersCorrect})
+ 
+   
 
     // refresh new chosen words
-
-    // render the quiz again
-    res.render('quiz', { chosenWords: chosenWords })
+   
+    
+   
     // Need to add the stuff here to render quiz
 });
 
@@ -35,6 +48,7 @@ let getWords = async () => {
     while (choices.length < 5) {
         // The issue is here because line is not returning anything
         let line = wordArray.pop();
+        if (!line) continue;
         let tokens = line.split('\t');
         let part = tokens[1];
         let def = tokens[2];
