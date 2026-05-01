@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
    
     let {userChoice, correctDef, correctWord, totalQuestions, answersCorrect} = req.body;
      let isCorrect = userChoice == correctDef;
-    if (isCorrect){
+    if (userChoice == correctDef){
         answersCorrect ++;
         console.log(`Answers Correct: ${answersCorrect}`);
     }
@@ -23,7 +23,7 @@ router.post("/", async (req, res) => {
     totalQuestions ++;
     console.log(req.body)
     console.log(`Total Questions: ${totalQuestions}`);
-    res.render('quiz', {chosenWords: chosenWords, correctDef: correctDef, correctWord: correctWord, totalQuestions: totalQuestions, answersCorrect: answersCorrect})
+    res.render('quiz', {prevUserChoice: userChoice, chosenWords: chosenWords, prevCorrectDef: correctDef, prevCorrectWord: correctWord, totalQuestions: totalQuestions, answersCorrect: answersCorrect})
  
    
 

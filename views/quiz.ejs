@@ -32,9 +32,24 @@
   
      
     <input type="submit" name = "action" value="Submit Answer">
-    <h2> Total Questions: <%= totalQuestions %></h2>
+    <h2> Total Questions Answered: <%= totalQuestions %></h2>
     <p> Answers Correct: <%= answersCorrect %> </p>
+    <% if (totalQuestions > 0){ %>
 
+        <% if(prevUserChoice === prevCorrectDef){ %>
+            <h2> <span class = "correct" > Correct!</span> </h2>
+            <p>For word: <%= prevCorrectWord %></p>
+           
+      <%  } 
+
+        else { %>
+
+             <h2> <span class = "wrong"> Wrong!</span> </h2>
+            <p>For word: <%= prevCorrectWord %></p>
+            <p>This is the correct Definition: <%= prevCorrectDef %></p>
+          <%  } %>
+       
+   <% } %>
 
     <input type="hidden" name ="correctDef" value="<%= correctDef %>">
     <input type="hidden" name ="correctWord" value="<%= correctWord %>">
