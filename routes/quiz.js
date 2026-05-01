@@ -25,20 +25,12 @@ router.post("/", async (req, res) => {
     console.log(`Total Questions: ${totalQuestions}`);
     res.render('quiz', {prevUserChoice: userChoice, chosenWords: chosenWords, prevCorrectDef: correctDef, prevCorrectWord: correctWord, totalQuestions: totalQuestions, answersCorrect: answersCorrect})
  
-   
-
-    // refresh new chosen words
-   
-    
-   
-    // Need to add the stuff here to render quiz
 });
 
 
 let getWords = async () => {
 
 
-    //baed on that, pick 4 words that match
     let randomPart = getRandomPart();
     let allWords = await readFile('resources/allwords.txt', 'utf8');
     let wordArray = allWords.split('\n');
@@ -46,7 +38,7 @@ let getWords = async () => {
 
     let choices = []
     while (choices.length < 5) {
-        // The issue is here because line is not returning anything
+      
         let line = wordArray.pop();
         if (!line) continue;
         let tokens = line.split('\t');
